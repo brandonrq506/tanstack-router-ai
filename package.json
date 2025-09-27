@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^9.9.0",
+    "@headlessui/react": "^2.2.9",
     "@tailwindcss/vite": "^4.1.13",
     "@tanstack/match-sorter-utils": "^8.19.4",
     "@tanstack/react-devtools": "^0.2.2",
