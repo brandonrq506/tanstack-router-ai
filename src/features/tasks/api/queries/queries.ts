@@ -14,7 +14,7 @@ export const taskKeys = {
 	list: ({ filter = {}, sort = {} }: TaskApiPreferences) =>
 		[{ ...taskKeys.lists()[0], filter, sort }] as const,
 	details: () => [{ ...taskKeys.all[0], entity: "details" }] as const,
-	detail: (taskId: number) => [{ ...taskKeys.details()[0], taskId }] as const,
+	detail: (taskId: string) => [{ ...taskKeys.details()[0], taskId }] as const,
 };
 
 export const scheduledTasksQueryOptions = () => {
@@ -44,7 +44,7 @@ export const todayCompletedTasksQueryOptions = () => {
 	});
 };
 
-export const taskByIdQueryOptions = (taskId: number) => {
+export const taskByIdQueryOptions = (taskId: string) => {
 	return queryOptions({
 		queryKey: taskKeys.detail(taskId),
 		queryFn: getTask,

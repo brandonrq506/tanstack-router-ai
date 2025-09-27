@@ -9,9 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ActivitiesRouteRouteImport } from './routes/activities/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo.tanstack-query'
+import { Route as ActivitiesNewRouteImport } from './routes/activities/new'
+import { Route as ActivitiesActivityIdRouteRouteImport } from './routes/activities/$activityId/route'
+import { Route as ActivitiesActivityIdIndexRouteImport } from './routes/activities/$activityId/index'
+import { Route as ActivitiesActivityIdEditRouteImport } from './routes/activities/$activityId/edit'
+import { Route as ActivitiesActivityIdDeleteRouteImport } from './routes/activities/$activityId/delete'
 
+const ActivitiesRouteRoute = ActivitiesRouteRouteImport.update({
+  id: '/activities',
+  path: '/activities',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -22,35 +33,113 @@ const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
   path: '/demo/tanstack-query',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ActivitiesNewRoute = ActivitiesNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => ActivitiesRouteRoute,
+} as any)
+const ActivitiesActivityIdRouteRoute =
+  ActivitiesActivityIdRouteRouteImport.update({
+    id: '/$activityId',
+    path: '/$activityId',
+    getParentRoute: () => ActivitiesRouteRoute,
+  } as any)
+const ActivitiesActivityIdIndexRoute =
+  ActivitiesActivityIdIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => ActivitiesActivityIdRouteRoute,
+  } as any)
+const ActivitiesActivityIdEditRoute =
+  ActivitiesActivityIdEditRouteImport.update({
+    id: '/edit',
+    path: '/edit',
+    getParentRoute: () => ActivitiesActivityIdRouteRoute,
+  } as any)
+const ActivitiesActivityIdDeleteRoute =
+  ActivitiesActivityIdDeleteRouteImport.update({
+    id: '/delete',
+    path: '/delete',
+    getParentRoute: () => ActivitiesActivityIdRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRouteRouteWithChildren
+  '/activities/$activityId': typeof ActivitiesActivityIdRouteRouteWithChildren
+  '/activities/new': typeof ActivitiesNewRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/activities/$activityId/delete': typeof ActivitiesActivityIdDeleteRoute
+  '/activities/$activityId/edit': typeof ActivitiesActivityIdEditRoute
+  '/activities/$activityId/': typeof ActivitiesActivityIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRouteRouteWithChildren
+  '/activities/new': typeof ActivitiesNewRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/activities/$activityId/delete': typeof ActivitiesActivityIdDeleteRoute
+  '/activities/$activityId/edit': typeof ActivitiesActivityIdEditRoute
+  '/activities/$activityId': typeof ActivitiesActivityIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRouteRouteWithChildren
+  '/activities/$activityId': typeof ActivitiesActivityIdRouteRouteWithChildren
+  '/activities/new': typeof ActivitiesNewRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/activities/$activityId/delete': typeof ActivitiesActivityIdDeleteRoute
+  '/activities/$activityId/edit': typeof ActivitiesActivityIdEditRoute
+  '/activities/$activityId/': typeof ActivitiesActivityIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demo/tanstack-query'
+  fullPaths:
+    | '/'
+    | '/activities'
+    | '/activities/$activityId'
+    | '/activities/new'
+    | '/demo/tanstack-query'
+    | '/activities/$activityId/delete'
+    | '/activities/$activityId/edit'
+    | '/activities/$activityId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo/tanstack-query'
-  id: '__root__' | '/' | '/demo/tanstack-query'
+  to:
+    | '/'
+    | '/activities'
+    | '/activities/new'
+    | '/demo/tanstack-query'
+    | '/activities/$activityId/delete'
+    | '/activities/$activityId/edit'
+    | '/activities/$activityId'
+  id:
+    | '__root__'
+    | '/'
+    | '/activities'
+    | '/activities/$activityId'
+    | '/activities/new'
+    | '/demo/tanstack-query'
+    | '/activities/$activityId/delete'
+    | '/activities/$activityId/edit'
+    | '/activities/$activityId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivitiesRouteRoute: typeof ActivitiesRouteRouteWithChildren
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/activities': {
+      id: '/activities'
+      path: '/activities'
+      fullPath: '/activities'
+      preLoaderRoute: typeof ActivitiesRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -65,11 +154,79 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoTanstackQueryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/activities/new': {
+      id: '/activities/new'
+      path: '/new'
+      fullPath: '/activities/new'
+      preLoaderRoute: typeof ActivitiesNewRouteImport
+      parentRoute: typeof ActivitiesRouteRoute
+    }
+    '/activities/$activityId': {
+      id: '/activities/$activityId'
+      path: '/$activityId'
+      fullPath: '/activities/$activityId'
+      preLoaderRoute: typeof ActivitiesActivityIdRouteRouteImport
+      parentRoute: typeof ActivitiesRouteRoute
+    }
+    '/activities/$activityId/': {
+      id: '/activities/$activityId/'
+      path: '/'
+      fullPath: '/activities/$activityId/'
+      preLoaderRoute: typeof ActivitiesActivityIdIndexRouteImport
+      parentRoute: typeof ActivitiesActivityIdRouteRoute
+    }
+    '/activities/$activityId/edit': {
+      id: '/activities/$activityId/edit'
+      path: '/edit'
+      fullPath: '/activities/$activityId/edit'
+      preLoaderRoute: typeof ActivitiesActivityIdEditRouteImport
+      parentRoute: typeof ActivitiesActivityIdRouteRoute
+    }
+    '/activities/$activityId/delete': {
+      id: '/activities/$activityId/delete'
+      path: '/delete'
+      fullPath: '/activities/$activityId/delete'
+      preLoaderRoute: typeof ActivitiesActivityIdDeleteRouteImport
+      parentRoute: typeof ActivitiesActivityIdRouteRoute
+    }
   }
 }
 
+interface ActivitiesActivityIdRouteRouteChildren {
+  ActivitiesActivityIdDeleteRoute: typeof ActivitiesActivityIdDeleteRoute
+  ActivitiesActivityIdEditRoute: typeof ActivitiesActivityIdEditRoute
+  ActivitiesActivityIdIndexRoute: typeof ActivitiesActivityIdIndexRoute
+}
+
+const ActivitiesActivityIdRouteRouteChildren: ActivitiesActivityIdRouteRouteChildren =
+  {
+    ActivitiesActivityIdDeleteRoute: ActivitiesActivityIdDeleteRoute,
+    ActivitiesActivityIdEditRoute: ActivitiesActivityIdEditRoute,
+    ActivitiesActivityIdIndexRoute: ActivitiesActivityIdIndexRoute,
+  }
+
+const ActivitiesActivityIdRouteRouteWithChildren =
+  ActivitiesActivityIdRouteRoute._addFileChildren(
+    ActivitiesActivityIdRouteRouteChildren,
+  )
+
+interface ActivitiesRouteRouteChildren {
+  ActivitiesActivityIdRouteRoute: typeof ActivitiesActivityIdRouteRouteWithChildren
+  ActivitiesNewRoute: typeof ActivitiesNewRoute
+}
+
+const ActivitiesRouteRouteChildren: ActivitiesRouteRouteChildren = {
+  ActivitiesActivityIdRouteRoute: ActivitiesActivityIdRouteRouteWithChildren,
+  ActivitiesNewRoute: ActivitiesNewRoute,
+}
+
+const ActivitiesRouteRouteWithChildren = ActivitiesRouteRoute._addFileChildren(
+  ActivitiesRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivitiesRouteRoute: ActivitiesRouteRouteWithChildren,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
 }
 export const routeTree = rootRouteImport

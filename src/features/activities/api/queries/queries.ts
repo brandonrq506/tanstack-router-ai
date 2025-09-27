@@ -7,11 +7,11 @@ export const activityKeys = {
 	all: [{ resource: ACTIVITIES_ENDPOINT }] as const,
 	lists: () => [{ ...activityKeys.all[0], entity: "list" }] as const,
 	details: () => [{ ...activityKeys.all[0], entity: "details" }] as const,
-	detail: (activityId: number) =>
+	detail: (activityId: string) =>
 		[{ ...activityKeys.details()[0], activityId }] as const,
 };
 
-export const activityByIdQueryOptions = (activityId: number) => {
+export const activityByIdQueryOptions = (activityId: string) => {
 	return queryOptions({
 		queryKey: activityKeys.detail(activityId),
 		queryFn: getActivity,
