@@ -9,15 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SettingsRouteRouteImport } from './routes/settings/route'
 import { Route as ActivitiesRouteRouteImport } from './routes/activities/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SettingsIndexRouteImport } from './routes/settings/index'
+import { Route as HistoryIndexRouteImport } from './routes/history/index'
+import { Route as SettingsNotificationsRouteImport } from './routes/settings/notifications'
+import { Route as SettingsAccountRouteImport } from './routes/settings/account'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo.tanstack-query'
 import { Route as ActivitiesNewRouteImport } from './routes/activities/new'
 import { Route as ActivitiesActivityIdRouteRouteImport } from './routes/activities/$activityId/route'
+import { Route as SettingsCategoriesIndexRouteImport } from './routes/settings/categories/index'
 import { Route as ActivitiesActivityIdIndexRouteImport } from './routes/activities/$activityId/index'
 import { Route as ActivitiesActivityIdEditRouteImport } from './routes/activities/$activityId/edit'
 import { Route as ActivitiesActivityIdDeleteRouteImport } from './routes/activities/$activityId/delete'
 
+const SettingsRouteRoute = SettingsRouteRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ActivitiesRouteRoute = ActivitiesRouteRouteImport.update({
   id: '/activities',
   path: '/activities',
@@ -27,6 +38,26 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsIndexRoute = SettingsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SettingsRouteRoute,
+} as any)
+const HistoryIndexRoute = HistoryIndexRouteImport.update({
+  id: '/history/',
+  path: '/history/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsNotificationsRoute = SettingsNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => SettingsRouteRoute,
+} as any)
+const SettingsAccountRoute = SettingsAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => SettingsRouteRoute,
 } as any)
 const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
   id: '/demo/tanstack-query',
@@ -44,6 +75,11 @@ const ActivitiesActivityIdRouteRoute =
     path: '/$activityId',
     getParentRoute: () => ActivitiesRouteRoute,
   } as any)
+const SettingsCategoriesIndexRoute = SettingsCategoriesIndexRouteImport.update({
+  id: '/categories/',
+  path: '/categories/',
+  getParentRoute: () => SettingsRouteRoute,
+} as any)
 const ActivitiesActivityIdIndexRoute =
   ActivitiesActivityIdIndexRouteImport.update({
     id: '/',
@@ -66,73 +102,116 @@ const ActivitiesActivityIdDeleteRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/activities': typeof ActivitiesRouteRouteWithChildren
+  '/settings': typeof SettingsRouteRouteWithChildren
   '/activities/$activityId': typeof ActivitiesActivityIdRouteRouteWithChildren
   '/activities/new': typeof ActivitiesNewRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/settings/account': typeof SettingsAccountRoute
+  '/settings/notifications': typeof SettingsNotificationsRoute
+  '/history': typeof HistoryIndexRoute
+  '/settings/': typeof SettingsIndexRoute
   '/activities/$activityId/delete': typeof ActivitiesActivityIdDeleteRoute
   '/activities/$activityId/edit': typeof ActivitiesActivityIdEditRoute
   '/activities/$activityId/': typeof ActivitiesActivityIdIndexRoute
+  '/settings/categories': typeof SettingsCategoriesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/activities': typeof ActivitiesRouteRouteWithChildren
   '/activities/new': typeof ActivitiesNewRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/settings/account': typeof SettingsAccountRoute
+  '/settings/notifications': typeof SettingsNotificationsRoute
+  '/history': typeof HistoryIndexRoute
+  '/settings': typeof SettingsIndexRoute
   '/activities/$activityId/delete': typeof ActivitiesActivityIdDeleteRoute
   '/activities/$activityId/edit': typeof ActivitiesActivityIdEditRoute
   '/activities/$activityId': typeof ActivitiesActivityIdIndexRoute
+  '/settings/categories': typeof SettingsCategoriesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/activities': typeof ActivitiesRouteRouteWithChildren
+  '/settings': typeof SettingsRouteRouteWithChildren
   '/activities/$activityId': typeof ActivitiesActivityIdRouteRouteWithChildren
   '/activities/new': typeof ActivitiesNewRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/settings/account': typeof SettingsAccountRoute
+  '/settings/notifications': typeof SettingsNotificationsRoute
+  '/history/': typeof HistoryIndexRoute
+  '/settings/': typeof SettingsIndexRoute
   '/activities/$activityId/delete': typeof ActivitiesActivityIdDeleteRoute
   '/activities/$activityId/edit': typeof ActivitiesActivityIdEditRoute
   '/activities/$activityId/': typeof ActivitiesActivityIdIndexRoute
+  '/settings/categories/': typeof SettingsCategoriesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/activities'
+    | '/settings'
     | '/activities/$activityId'
     | '/activities/new'
     | '/demo/tanstack-query'
+    | '/settings/account'
+    | '/settings/notifications'
+    | '/history'
+    | '/settings/'
     | '/activities/$activityId/delete'
     | '/activities/$activityId/edit'
     | '/activities/$activityId/'
+    | '/settings/categories'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/activities'
     | '/activities/new'
     | '/demo/tanstack-query'
+    | '/settings/account'
+    | '/settings/notifications'
+    | '/history'
+    | '/settings'
     | '/activities/$activityId/delete'
     | '/activities/$activityId/edit'
     | '/activities/$activityId'
+    | '/settings/categories'
   id:
     | '__root__'
     | '/'
     | '/activities'
+    | '/settings'
     | '/activities/$activityId'
     | '/activities/new'
     | '/demo/tanstack-query'
+    | '/settings/account'
+    | '/settings/notifications'
+    | '/history/'
+    | '/settings/'
     | '/activities/$activityId/delete'
     | '/activities/$activityId/edit'
     | '/activities/$activityId/'
+    | '/settings/categories/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ActivitiesRouteRoute: typeof ActivitiesRouteRouteWithChildren
+  SettingsRouteRoute: typeof SettingsRouteRouteWithChildren
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
+  HistoryIndexRoute: typeof HistoryIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/activities': {
       id: '/activities'
       path: '/activities'
@@ -146,6 +225,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/settings/': {
+      id: '/settings/'
+      path: '/'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof SettingsIndexRouteImport
+      parentRoute: typeof SettingsRouteRoute
+    }
+    '/history/': {
+      id: '/history/'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/notifications': {
+      id: '/settings/notifications'
+      path: '/notifications'
+      fullPath: '/settings/notifications'
+      preLoaderRoute: typeof SettingsNotificationsRouteImport
+      parentRoute: typeof SettingsRouteRoute
+    }
+    '/settings/account': {
+      id: '/settings/account'
+      path: '/account'
+      fullPath: '/settings/account'
+      preLoaderRoute: typeof SettingsAccountRouteImport
+      parentRoute: typeof SettingsRouteRoute
     }
     '/demo/tanstack-query': {
       id: '/demo/tanstack-query'
@@ -167,6 +274,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/activities/$activityId'
       preLoaderRoute: typeof ActivitiesActivityIdRouteRouteImport
       parentRoute: typeof ActivitiesRouteRoute
+    }
+    '/settings/categories/': {
+      id: '/settings/categories/'
+      path: '/categories'
+      fullPath: '/settings/categories'
+      preLoaderRoute: typeof SettingsCategoriesIndexRouteImport
+      parentRoute: typeof SettingsRouteRoute
     }
     '/activities/$activityId/': {
       id: '/activities/$activityId/'
@@ -224,10 +338,30 @@ const ActivitiesRouteRouteWithChildren = ActivitiesRouteRoute._addFileChildren(
   ActivitiesRouteRouteChildren,
 )
 
+interface SettingsRouteRouteChildren {
+  SettingsAccountRoute: typeof SettingsAccountRoute
+  SettingsNotificationsRoute: typeof SettingsNotificationsRoute
+  SettingsIndexRoute: typeof SettingsIndexRoute
+  SettingsCategoriesIndexRoute: typeof SettingsCategoriesIndexRoute
+}
+
+const SettingsRouteRouteChildren: SettingsRouteRouteChildren = {
+  SettingsAccountRoute: SettingsAccountRoute,
+  SettingsNotificationsRoute: SettingsNotificationsRoute,
+  SettingsIndexRoute: SettingsIndexRoute,
+  SettingsCategoriesIndexRoute: SettingsCategoriesIndexRoute,
+}
+
+const SettingsRouteRouteWithChildren = SettingsRouteRoute._addFileChildren(
+  SettingsRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ActivitiesRouteRoute: ActivitiesRouteRouteWithChildren,
+  SettingsRouteRoute: SettingsRouteRouteWithChildren,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
+  HistoryIndexRoute: HistoryIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

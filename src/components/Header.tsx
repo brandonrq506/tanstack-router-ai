@@ -9,7 +9,13 @@ export default function Header() {
 				</div>
 
 				<div className="px-2 font-bold">
-					<Link to="/demo/table">TanStack Table</Link>
+					<Link to="/settings">Settings</Link>
+				</div>
+
+				<div className="px-2 font-bold">
+					<Link to="/history" search={{ date: "today" }}>
+						History
+					</Link>
 				</div>
 
 				<div className="px-2 font-bold">
