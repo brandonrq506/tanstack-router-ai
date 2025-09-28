@@ -1,39 +1,34 @@
+import {
+	inProgressTasksQueryOptions,
+	scheduledTasksQueryOptions,
+	todayCompletedTasksQueryOptions,
+} from "@/features/tasks/api/queries/queries";
+import { ScheduledTaskList } from "@/features/tasks/components/scheduled-task-list";
+import { TimerPanel } from "@/features/tasks/components/timer-panel";
+import { TodayCompletedTaskList } from "@/features/tasks/components/today-completed-task-list";
 import { createFileRoute } from "@tanstack/react-router";
-import logo from "../logo.svg";
 
 export const Route = createFileRoute("/")({
 	component: App,
+	// Warm the cache for all three without blocking the route render.
+	loader: ({ context: { queryClient } }) => {
+		queryClient.prefetchQuery(inProgressTasksQueryOptions()).catch(() => {});
+		queryClient.prefetchQuery(scheduledTasksQueryOptions()).catch(() => {});
+		queryClient
+			.prefetchQuery(todayCompletedTasksQueryOptions())
+			.catch(() => {});
+	},
 });
 
 function App() {
 	return (
-		<div className="text-center">
-			<header className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white text-[calc(10px+2vmin)]">
-				<img
-					src={logo}
-					className="h-[40vmin] pointer-events-none animate-[spin_20s_linear_infinite]"
-					alt="logo"
-				/>
-				<p>
-					Edit <code>src/routes/index.tsx</code> and save to reload.
-				</p>
-				<a
-					className="text-[#61dafb] hover:underline"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-				<a
-					className="text-[#61dafb] hover:underline"
-					href="https://tanstack.com"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn TanStack
-				</a>
-			</header>
+		<div className="p-4">
+			<TimerPanel />
+			<br />
+			<div className="grid gap-5 md:grid-cols-2">
+				<ScheduledTaskList />
+				<TodayCompletedTaskList />
+			</div>
 		</div>
-	)
+	);
 }
