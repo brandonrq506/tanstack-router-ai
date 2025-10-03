@@ -30,5 +30,5 @@ function App() {
 				<TodayCompletedTaskList />
 			</div>
 		</div>
-	)
+	);
 }

@@ -1,8 +1,4 @@
-import {
-	type PropsWithChildren,
-	useCallback,
-	useState,
-} from "react";
+import { type PropsWithChildren, useCallback, useState } from "react";
 
 import { apiV1 } from "@/integrations/axios";
 import { AxiosHeaders } from "axios";
@@ -39,7 +35,8 @@ const ensureAuthInterceptors = () => {
 			return config;
 		}
 
-		(config.headers as Record<string, string>).Authorization = `Bearer ${token}`;
+		(config.headers as Record<string, string>).Authorization =
+			`Bearer ${token}`;
 		return config;
 	});
 

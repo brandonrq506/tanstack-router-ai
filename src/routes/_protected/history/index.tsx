@@ -25,7 +25,7 @@ export const Route = createFileRoute("/_protected/history/")({
 
 		return {
 			date: param,
-		}
+		};
 	},
 	loaderDeps: ({ search: { date } }) => ({ date }),
 	loader: ({ context: { queryClient }, deps: { date } }) =>
@@ -38,9 +38,9 @@ function RouteComponent() {
 	return (
 		<div>
 			<h2>Welcome to Task History for {date}</h2>
-      <DateFilterInput date={date} />
+			<DateFilterInput date={date} />
 			<br />
 			<TaskList date={date} />
 		</div>
-	)
+	);
 }

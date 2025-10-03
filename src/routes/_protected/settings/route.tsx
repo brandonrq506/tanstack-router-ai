@@ -34,5 +34,5 @@ function RouteComponent() {
 			<br />
 			<Outlet />
 		</div>
-	)
+	);
 }
