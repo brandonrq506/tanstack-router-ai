@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/settings/categories/')({
+export const Route = createFileRoute('/_protected/settings/categories/')({
   component: RouteComponent,
 })
 

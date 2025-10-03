@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Modal } from "@/components/core";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/activities/new")({
+export const Route = createFileRoute("/_protected/activities/new")({
 	component: RouteComponent,
 });
 
@@ -19,5 +19,5 @@ function RouteComponent() {
 			onClose={() => navigate({ to: "..", from: Route.id })}>
 			Hello "/activities/new"!
 		</Modal>
-	);
+	)
 }

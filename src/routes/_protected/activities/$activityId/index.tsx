@@ -5,7 +5,7 @@ import { Modal } from "@/components/core";
 import { activityByIdQueryOptions } from "@/features/activities/api/queries/queries";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/activities/$activityId/edit")({
+export const Route = createFileRoute("/_protected/activities/$activityId/")({
 	component: RouteComponent,
 });
 
@@ -23,8 +23,12 @@ function RouteComponent() {
 		<Modal
 			isOpen={isOpen}
 			onClose={() => navigate({ to: "../..", from: Route.id, replace: true })}>
-			<h2>Editing activity {data.name}</h2>
-			<p>Activities time: {data.exp_seconds}</p>
+			<h2>Showing details for: {data.name}</h2>
+			<br />
+			<p>
+				Here you can have some stats about this Activity like times performed,
+				avg_time, expect time, etc. Rate of times under expected time, etc.
+			</p>
 		</Modal>
-	);
+	)
 }

@@ -10,167 +10,171 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as SettingsRouteRouteImport } from './routes/settings/route'
-import { Route as ActivitiesRouteRouteImport } from './routes/activities/route'
 import { Route as ProtectedRouteRouteImport } from './routes/_protected/route'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as SettingsIndexRouteImport } from './routes/settings/index'
-import { Route as HistoryIndexRouteImport } from './routes/history/index'
-import { Route as SettingsNotificationsRouteImport } from './routes/settings/notifications'
-import { Route as SettingsAccountRouteImport } from './routes/settings/account'
+import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo.tanstack-query'
-import { Route as ActivitiesNewRouteImport } from './routes/activities/new'
-import { Route as ActivitiesActivityIdRouteRouteImport } from './routes/activities/$activityId/route'
-import { Route as SettingsCategoriesIndexRouteImport } from './routes/settings/categories/index'
-import { Route as ActivitiesActivityIdIndexRouteImport } from './routes/activities/$activityId/index'
-import { Route as ActivitiesActivityIdEditRouteImport } from './routes/activities/$activityId/edit'
-import { Route as ActivitiesActivityIdDeleteRouteImport } from './routes/activities/$activityId/delete'
+import { Route as ProtectedSettingsRouteRouteImport } from './routes/_protected/settings/route'
+import { Route as ProtectedActivitiesRouteRouteImport } from './routes/_protected/activities/route'
+import { Route as ProtectedSettingsIndexRouteImport } from './routes/_protected/settings/index'
+import { Route as ProtectedHistoryIndexRouteImport } from './routes/_protected/history/index'
+import { Route as ProtectedSettingsNotificationsRouteImport } from './routes/_protected/settings/notifications'
+import { Route as ProtectedSettingsAccountRouteImport } from './routes/_protected/settings/account'
+import { Route as ProtectedActivitiesNewRouteImport } from './routes/_protected/activities/new'
+import { Route as ProtectedActivitiesActivityIdRouteRouteImport } from './routes/_protected/activities/$activityId/route'
+import { Route as ProtectedSettingsCategoriesIndexRouteImport } from './routes/_protected/settings/categories/index'
+import { Route as ProtectedActivitiesActivityIdIndexRouteImport } from './routes/_protected/activities/$activityId/index'
+import { Route as ProtectedActivitiesActivityIdEditRouteImport } from './routes/_protected/activities/$activityId/edit'
+import { Route as ProtectedActivitiesActivityIdDeleteRouteImport } from './routes/_protected/activities/$activityId/delete'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SettingsRouteRoute = SettingsRouteRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ActivitiesRouteRoute = ActivitiesRouteRouteImport.update({
-  id: '/activities',
-  path: '/activities',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ProtectedRouteRoute = ProtectedRouteRouteImport.update({
   id: '/_protected',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const ProtectedIndexRoute = ProtectedIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SettingsIndexRoute = SettingsIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => SettingsRouteRoute,
-} as any)
-const HistoryIndexRoute = HistoryIndexRouteImport.update({
-  id: '/history/',
-  path: '/history/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SettingsNotificationsRoute = SettingsNotificationsRouteImport.update({
-  id: '/notifications',
-  path: '/notifications',
-  getParentRoute: () => SettingsRouteRoute,
-} as any)
-const SettingsAccountRoute = SettingsAccountRouteImport.update({
-  id: '/account',
-  path: '/account',
-  getParentRoute: () => SettingsRouteRoute,
+  getParentRoute: () => ProtectedRouteRoute,
 } as any)
 const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
   id: '/demo/tanstack-query',
   path: '/demo/tanstack-query',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ActivitiesNewRoute = ActivitiesNewRouteImport.update({
+const ProtectedSettingsRouteRoute = ProtectedSettingsRouteRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+const ProtectedActivitiesRouteRoute =
+  ProtectedActivitiesRouteRouteImport.update({
+    id: '/activities',
+    path: '/activities',
+    getParentRoute: () => ProtectedRouteRoute,
+  } as any)
+const ProtectedSettingsIndexRoute = ProtectedSettingsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProtectedSettingsRouteRoute,
+} as any)
+const ProtectedHistoryIndexRoute = ProtectedHistoryIndexRouteImport.update({
+  id: '/history/',
+  path: '/history/',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+const ProtectedSettingsNotificationsRoute =
+  ProtectedSettingsNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => ProtectedSettingsRouteRoute,
+  } as any)
+const ProtectedSettingsAccountRoute =
+  ProtectedSettingsAccountRouteImport.update({
+    id: '/account',
+    path: '/account',
+    getParentRoute: () => ProtectedSettingsRouteRoute,
+  } as any)
+const ProtectedActivitiesNewRoute = ProtectedActivitiesNewRouteImport.update({
   id: '/new',
   path: '/new',
-  getParentRoute: () => ActivitiesRouteRoute,
+  getParentRoute: () => ProtectedActivitiesRouteRoute,
 } as any)
-const ActivitiesActivityIdRouteRoute =
-  ActivitiesActivityIdRouteRouteImport.update({
+const ProtectedActivitiesActivityIdRouteRoute =
+  ProtectedActivitiesActivityIdRouteRouteImport.update({
     id: '/$activityId',
     path: '/$activityId',
-    getParentRoute: () => ActivitiesRouteRoute,
+    getParentRoute: () => ProtectedActivitiesRouteRoute,
   } as any)
-const SettingsCategoriesIndexRoute = SettingsCategoriesIndexRouteImport.update({
-  id: '/categories/',
-  path: '/categories/',
-  getParentRoute: () => SettingsRouteRoute,
-} as any)
-const ActivitiesActivityIdIndexRoute =
-  ActivitiesActivityIdIndexRouteImport.update({
+const ProtectedSettingsCategoriesIndexRoute =
+  ProtectedSettingsCategoriesIndexRouteImport.update({
+    id: '/categories/',
+    path: '/categories/',
+    getParentRoute: () => ProtectedSettingsRouteRoute,
+  } as any)
+const ProtectedActivitiesActivityIdIndexRoute =
+  ProtectedActivitiesActivityIdIndexRouteImport.update({
     id: '/',
     path: '/',
-    getParentRoute: () => ActivitiesActivityIdRouteRoute,
+    getParentRoute: () => ProtectedActivitiesActivityIdRouteRoute,
   } as any)
-const ActivitiesActivityIdEditRoute =
-  ActivitiesActivityIdEditRouteImport.update({
+const ProtectedActivitiesActivityIdEditRoute =
+  ProtectedActivitiesActivityIdEditRouteImport.update({
     id: '/edit',
     path: '/edit',
-    getParentRoute: () => ActivitiesActivityIdRouteRoute,
+    getParentRoute: () => ProtectedActivitiesActivityIdRouteRoute,
   } as any)
-const ActivitiesActivityIdDeleteRoute =
-  ActivitiesActivityIdDeleteRouteImport.update({
+const ProtectedActivitiesActivityIdDeleteRoute =
+  ProtectedActivitiesActivityIdDeleteRouteImport.update({
     id: '/delete',
     path: '/delete',
-    getParentRoute: () => ActivitiesActivityIdRouteRoute,
+    getParentRoute: () => ProtectedActivitiesActivityIdRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/activities': typeof ActivitiesRouteRouteWithChildren
-  '/settings': typeof SettingsRouteRouteWithChildren
   '/login': typeof LoginRoute
-  '/activities/$activityId': typeof ActivitiesActivityIdRouteRouteWithChildren
-  '/activities/new': typeof ActivitiesNewRoute
+  '/activities': typeof ProtectedActivitiesRouteRouteWithChildren
+  '/settings': typeof ProtectedSettingsRouteRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/settings/account': typeof SettingsAccountRoute
-  '/settings/notifications': typeof SettingsNotificationsRoute
-  '/history': typeof HistoryIndexRoute
-  '/settings/': typeof SettingsIndexRoute
-  '/activities/$activityId/delete': typeof ActivitiesActivityIdDeleteRoute
-  '/activities/$activityId/edit': typeof ActivitiesActivityIdEditRoute
-  '/activities/$activityId/': typeof ActivitiesActivityIdIndexRoute
-  '/settings/categories': typeof SettingsCategoriesIndexRoute
+  '/': typeof ProtectedIndexRoute
+  '/activities/$activityId': typeof ProtectedActivitiesActivityIdRouteRouteWithChildren
+  '/activities/new': typeof ProtectedActivitiesNewRoute
+  '/settings/account': typeof ProtectedSettingsAccountRoute
+  '/settings/notifications': typeof ProtectedSettingsNotificationsRoute
+  '/history': typeof ProtectedHistoryIndexRoute
+  '/settings/': typeof ProtectedSettingsIndexRoute
+  '/activities/$activityId/delete': typeof ProtectedActivitiesActivityIdDeleteRoute
+  '/activities/$activityId/edit': typeof ProtectedActivitiesActivityIdEditRoute
+  '/activities/$activityId/': typeof ProtectedActivitiesActivityIdIndexRoute
+  '/settings/categories': typeof ProtectedSettingsCategoriesIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/activities': typeof ActivitiesRouteRouteWithChildren
   '/login': typeof LoginRoute
-  '/activities/new': typeof ActivitiesNewRoute
+  '/activities': typeof ProtectedActivitiesRouteRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/settings/account': typeof SettingsAccountRoute
-  '/settings/notifications': typeof SettingsNotificationsRoute
-  '/history': typeof HistoryIndexRoute
-  '/settings': typeof SettingsIndexRoute
-  '/activities/$activityId/delete': typeof ActivitiesActivityIdDeleteRoute
-  '/activities/$activityId/edit': typeof ActivitiesActivityIdEditRoute
-  '/activities/$activityId': typeof ActivitiesActivityIdIndexRoute
-  '/settings/categories': typeof SettingsCategoriesIndexRoute
+  '/': typeof ProtectedIndexRoute
+  '/activities/new': typeof ProtectedActivitiesNewRoute
+  '/settings/account': typeof ProtectedSettingsAccountRoute
+  '/settings/notifications': typeof ProtectedSettingsNotificationsRoute
+  '/history': typeof ProtectedHistoryIndexRoute
+  '/settings': typeof ProtectedSettingsIndexRoute
+  '/activities/$activityId/delete': typeof ProtectedActivitiesActivityIdDeleteRoute
+  '/activities/$activityId/edit': typeof ProtectedActivitiesActivityIdEditRoute
+  '/activities/$activityId': typeof ProtectedActivitiesActivityIdIndexRoute
+  '/settings/categories': typeof ProtectedSettingsCategoriesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/_protected': typeof ProtectedRouteRoute
-  '/activities': typeof ActivitiesRouteRouteWithChildren
-  '/settings': typeof SettingsRouteRouteWithChildren
+  '/_protected': typeof ProtectedRouteRouteWithChildren
   '/login': typeof LoginRoute
-  '/activities/$activityId': typeof ActivitiesActivityIdRouteRouteWithChildren
-  '/activities/new': typeof ActivitiesNewRoute
+  '/_protected/activities': typeof ProtectedActivitiesRouteRouteWithChildren
+  '/_protected/settings': typeof ProtectedSettingsRouteRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/settings/account': typeof SettingsAccountRoute
-  '/settings/notifications': typeof SettingsNotificationsRoute
-  '/history/': typeof HistoryIndexRoute
-  '/settings/': typeof SettingsIndexRoute
-  '/activities/$activityId/delete': typeof ActivitiesActivityIdDeleteRoute
-  '/activities/$activityId/edit': typeof ActivitiesActivityIdEditRoute
-  '/activities/$activityId/': typeof ActivitiesActivityIdIndexRoute
-  '/settings/categories/': typeof SettingsCategoriesIndexRoute
+  '/_protected/': typeof ProtectedIndexRoute
+  '/_protected/activities/$activityId': typeof ProtectedActivitiesActivityIdRouteRouteWithChildren
+  '/_protected/activities/new': typeof ProtectedActivitiesNewRoute
+  '/_protected/settings/account': typeof ProtectedSettingsAccountRoute
+  '/_protected/settings/notifications': typeof ProtectedSettingsNotificationsRoute
+  '/_protected/history/': typeof ProtectedHistoryIndexRoute
+  '/_protected/settings/': typeof ProtectedSettingsIndexRoute
+  '/_protected/activities/$activityId/delete': typeof ProtectedActivitiesActivityIdDeleteRoute
+  '/_protected/activities/$activityId/edit': typeof ProtectedActivitiesActivityIdEditRoute
+  '/_protected/activities/$activityId/': typeof ProtectedActivitiesActivityIdIndexRoute
+  '/_protected/settings/categories/': typeof ProtectedSettingsCategoriesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
+    | '/login'
     | '/activities'
     | '/settings'
-    | '/login'
+    | '/demo/tanstack-query'
+    | '/'
     | '/activities/$activityId'
     | '/activities/new'
-    | '/demo/tanstack-query'
     | '/settings/account'
     | '/settings/notifications'
     | '/history'
@@ -181,11 +185,11 @@ export interface FileRouteTypes {
     | '/settings/categories'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/activities'
     | '/login'
-    | '/activities/new'
+    | '/activities'
     | '/demo/tanstack-query'
+    | '/'
+    | '/activities/new'
     | '/settings/account'
     | '/settings/notifications'
     | '/history'
@@ -196,32 +200,28 @@ export interface FileRouteTypes {
     | '/settings/categories'
   id:
     | '__root__'
-    | '/'
     | '/_protected'
-    | '/activities'
-    | '/settings'
     | '/login'
-    | '/activities/$activityId'
-    | '/activities/new'
+    | '/_protected/activities'
+    | '/_protected/settings'
     | '/demo/tanstack-query'
-    | '/settings/account'
-    | '/settings/notifications'
-    | '/history/'
-    | '/settings/'
-    | '/activities/$activityId/delete'
-    | '/activities/$activityId/edit'
-    | '/activities/$activityId/'
-    | '/settings/categories/'
+    | '/_protected/'
+    | '/_protected/activities/$activityId'
+    | '/_protected/activities/new'
+    | '/_protected/settings/account'
+    | '/_protected/settings/notifications'
+    | '/_protected/history/'
+    | '/_protected/settings/'
+    | '/_protected/activities/$activityId/delete'
+    | '/_protected/activities/$activityId/edit'
+    | '/_protected/activities/$activityId/'
+    | '/_protected/settings/categories/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  ProtectedRouteRoute: typeof ProtectedRouteRoute
-  ActivitiesRouteRoute: typeof ActivitiesRouteRouteWithChildren
-  SettingsRouteRoute: typeof SettingsRouteRouteWithChildren
+  ProtectedRouteRoute: typeof ProtectedRouteRouteWithChildren
   LoginRoute: typeof LoginRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
-  HistoryIndexRoute: typeof HistoryIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -233,20 +233,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/settings': {
-      id: '/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof SettingsRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/activities': {
-      id: '/activities'
-      path: '/activities'
-      fullPath: '/activities'
-      preLoaderRoute: typeof ActivitiesRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_protected': {
       id: '/_protected'
       path: ''
@@ -254,40 +240,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/_protected/': {
+      id: '/_protected/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/settings/': {
-      id: '/settings/'
-      path: '/'
-      fullPath: '/settings/'
-      preLoaderRoute: typeof SettingsIndexRouteImport
-      parentRoute: typeof SettingsRouteRoute
-    }
-    '/history/': {
-      id: '/history/'
-      path: '/history'
-      fullPath: '/history'
-      preLoaderRoute: typeof HistoryIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/settings/notifications': {
-      id: '/settings/notifications'
-      path: '/notifications'
-      fullPath: '/settings/notifications'
-      preLoaderRoute: typeof SettingsNotificationsRouteImport
-      parentRoute: typeof SettingsRouteRoute
-    }
-    '/settings/account': {
-      id: '/settings/account'
-      path: '/account'
-      fullPath: '/settings/account'
-      preLoaderRoute: typeof SettingsAccountRouteImport
-      parentRoute: typeof SettingsRouteRoute
+      preLoaderRoute: typeof ProtectedIndexRouteImport
+      parentRoute: typeof ProtectedRouteRoute
     }
     '/demo/tanstack-query': {
       id: '/demo/tanstack-query'
@@ -296,109 +254,174 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoTanstackQueryRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/activities/new': {
-      id: '/activities/new'
+    '/_protected/settings': {
+      id: '/_protected/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof ProtectedSettingsRouteRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/activities': {
+      id: '/_protected/activities'
+      path: '/activities'
+      fullPath: '/activities'
+      preLoaderRoute: typeof ProtectedActivitiesRouteRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/settings/': {
+      id: '/_protected/settings/'
+      path: '/'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof ProtectedSettingsIndexRouteImport
+      parentRoute: typeof ProtectedSettingsRouteRoute
+    }
+    '/_protected/history/': {
+      id: '/_protected/history/'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof ProtectedHistoryIndexRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/settings/notifications': {
+      id: '/_protected/settings/notifications'
+      path: '/notifications'
+      fullPath: '/settings/notifications'
+      preLoaderRoute: typeof ProtectedSettingsNotificationsRouteImport
+      parentRoute: typeof ProtectedSettingsRouteRoute
+    }
+    '/_protected/settings/account': {
+      id: '/_protected/settings/account'
+      path: '/account'
+      fullPath: '/settings/account'
+      preLoaderRoute: typeof ProtectedSettingsAccountRouteImport
+      parentRoute: typeof ProtectedSettingsRouteRoute
+    }
+    '/_protected/activities/new': {
+      id: '/_protected/activities/new'
       path: '/new'
       fullPath: '/activities/new'
-      preLoaderRoute: typeof ActivitiesNewRouteImport
-      parentRoute: typeof ActivitiesRouteRoute
+      preLoaderRoute: typeof ProtectedActivitiesNewRouteImport
+      parentRoute: typeof ProtectedActivitiesRouteRoute
     }
-    '/activities/$activityId': {
-      id: '/activities/$activityId'
+    '/_protected/activities/$activityId': {
+      id: '/_protected/activities/$activityId'
       path: '/$activityId'
       fullPath: '/activities/$activityId'
-      preLoaderRoute: typeof ActivitiesActivityIdRouteRouteImport
-      parentRoute: typeof ActivitiesRouteRoute
+      preLoaderRoute: typeof ProtectedActivitiesActivityIdRouteRouteImport
+      parentRoute: typeof ProtectedActivitiesRouteRoute
     }
-    '/settings/categories/': {
-      id: '/settings/categories/'
+    '/_protected/settings/categories/': {
+      id: '/_protected/settings/categories/'
       path: '/categories'
       fullPath: '/settings/categories'
-      preLoaderRoute: typeof SettingsCategoriesIndexRouteImport
-      parentRoute: typeof SettingsRouteRoute
+      preLoaderRoute: typeof ProtectedSettingsCategoriesIndexRouteImport
+      parentRoute: typeof ProtectedSettingsRouteRoute
     }
-    '/activities/$activityId/': {
-      id: '/activities/$activityId/'
+    '/_protected/activities/$activityId/': {
+      id: '/_protected/activities/$activityId/'
       path: '/'
       fullPath: '/activities/$activityId/'
-      preLoaderRoute: typeof ActivitiesActivityIdIndexRouteImport
-      parentRoute: typeof ActivitiesActivityIdRouteRoute
+      preLoaderRoute: typeof ProtectedActivitiesActivityIdIndexRouteImport
+      parentRoute: typeof ProtectedActivitiesActivityIdRouteRoute
     }
-    '/activities/$activityId/edit': {
-      id: '/activities/$activityId/edit'
+    '/_protected/activities/$activityId/edit': {
+      id: '/_protected/activities/$activityId/edit'
       path: '/edit'
       fullPath: '/activities/$activityId/edit'
-      preLoaderRoute: typeof ActivitiesActivityIdEditRouteImport
-      parentRoute: typeof ActivitiesActivityIdRouteRoute
+      preLoaderRoute: typeof ProtectedActivitiesActivityIdEditRouteImport
+      parentRoute: typeof ProtectedActivitiesActivityIdRouteRoute
     }
-    '/activities/$activityId/delete': {
-      id: '/activities/$activityId/delete'
+    '/_protected/activities/$activityId/delete': {
+      id: '/_protected/activities/$activityId/delete'
       path: '/delete'
       fullPath: '/activities/$activityId/delete'
-      preLoaderRoute: typeof ActivitiesActivityIdDeleteRouteImport
-      parentRoute: typeof ActivitiesActivityIdRouteRoute
+      preLoaderRoute: typeof ProtectedActivitiesActivityIdDeleteRouteImport
+      parentRoute: typeof ProtectedActivitiesActivityIdRouteRoute
     }
   }
 }
 
-interface ActivitiesActivityIdRouteRouteChildren {
-  ActivitiesActivityIdDeleteRoute: typeof ActivitiesActivityIdDeleteRoute
-  ActivitiesActivityIdEditRoute: typeof ActivitiesActivityIdEditRoute
-  ActivitiesActivityIdIndexRoute: typeof ActivitiesActivityIdIndexRoute
+interface ProtectedActivitiesActivityIdRouteRouteChildren {
+  ProtectedActivitiesActivityIdDeleteRoute: typeof ProtectedActivitiesActivityIdDeleteRoute
+  ProtectedActivitiesActivityIdEditRoute: typeof ProtectedActivitiesActivityIdEditRoute
+  ProtectedActivitiesActivityIdIndexRoute: typeof ProtectedActivitiesActivityIdIndexRoute
 }
 
-const ActivitiesActivityIdRouteRouteChildren: ActivitiesActivityIdRouteRouteChildren =
+const ProtectedActivitiesActivityIdRouteRouteChildren: ProtectedActivitiesActivityIdRouteRouteChildren =
   {
-    ActivitiesActivityIdDeleteRoute: ActivitiesActivityIdDeleteRoute,
-    ActivitiesActivityIdEditRoute: ActivitiesActivityIdEditRoute,
-    ActivitiesActivityIdIndexRoute: ActivitiesActivityIdIndexRoute,
+    ProtectedActivitiesActivityIdDeleteRoute:
+      ProtectedActivitiesActivityIdDeleteRoute,
+    ProtectedActivitiesActivityIdEditRoute:
+      ProtectedActivitiesActivityIdEditRoute,
+    ProtectedActivitiesActivityIdIndexRoute:
+      ProtectedActivitiesActivityIdIndexRoute,
   }
 
-const ActivitiesActivityIdRouteRouteWithChildren =
-  ActivitiesActivityIdRouteRoute._addFileChildren(
-    ActivitiesActivityIdRouteRouteChildren,
+const ProtectedActivitiesActivityIdRouteRouteWithChildren =
+  ProtectedActivitiesActivityIdRouteRoute._addFileChildren(
+    ProtectedActivitiesActivityIdRouteRouteChildren,
   )
 
-interface ActivitiesRouteRouteChildren {
-  ActivitiesActivityIdRouteRoute: typeof ActivitiesActivityIdRouteRouteWithChildren
-  ActivitiesNewRoute: typeof ActivitiesNewRoute
+interface ProtectedActivitiesRouteRouteChildren {
+  ProtectedActivitiesActivityIdRouteRoute: typeof ProtectedActivitiesActivityIdRouteRouteWithChildren
+  ProtectedActivitiesNewRoute: typeof ProtectedActivitiesNewRoute
 }
 
-const ActivitiesRouteRouteChildren: ActivitiesRouteRouteChildren = {
-  ActivitiesActivityIdRouteRoute: ActivitiesActivityIdRouteRouteWithChildren,
-  ActivitiesNewRoute: ActivitiesNewRoute,
+const ProtectedActivitiesRouteRouteChildren: ProtectedActivitiesRouteRouteChildren =
+  {
+    ProtectedActivitiesActivityIdRouteRoute:
+      ProtectedActivitiesActivityIdRouteRouteWithChildren,
+    ProtectedActivitiesNewRoute: ProtectedActivitiesNewRoute,
+  }
+
+const ProtectedActivitiesRouteRouteWithChildren =
+  ProtectedActivitiesRouteRoute._addFileChildren(
+    ProtectedActivitiesRouteRouteChildren,
+  )
+
+interface ProtectedSettingsRouteRouteChildren {
+  ProtectedSettingsAccountRoute: typeof ProtectedSettingsAccountRoute
+  ProtectedSettingsNotificationsRoute: typeof ProtectedSettingsNotificationsRoute
+  ProtectedSettingsIndexRoute: typeof ProtectedSettingsIndexRoute
+  ProtectedSettingsCategoriesIndexRoute: typeof ProtectedSettingsCategoriesIndexRoute
 }
 
-const ActivitiesRouteRouteWithChildren = ActivitiesRouteRoute._addFileChildren(
-  ActivitiesRouteRouteChildren,
-)
+const ProtectedSettingsRouteRouteChildren: ProtectedSettingsRouteRouteChildren =
+  {
+    ProtectedSettingsAccountRoute: ProtectedSettingsAccountRoute,
+    ProtectedSettingsNotificationsRoute: ProtectedSettingsNotificationsRoute,
+    ProtectedSettingsIndexRoute: ProtectedSettingsIndexRoute,
+    ProtectedSettingsCategoriesIndexRoute:
+      ProtectedSettingsCategoriesIndexRoute,
+  }
 
-interface SettingsRouteRouteChildren {
-  SettingsAccountRoute: typeof SettingsAccountRoute
-  SettingsNotificationsRoute: typeof SettingsNotificationsRoute
-  SettingsIndexRoute: typeof SettingsIndexRoute
-  SettingsCategoriesIndexRoute: typeof SettingsCategoriesIndexRoute
+const ProtectedSettingsRouteRouteWithChildren =
+  ProtectedSettingsRouteRoute._addFileChildren(
+    ProtectedSettingsRouteRouteChildren,
+  )
+
+interface ProtectedRouteRouteChildren {
+  ProtectedActivitiesRouteRoute: typeof ProtectedActivitiesRouteRouteWithChildren
+  ProtectedSettingsRouteRoute: typeof ProtectedSettingsRouteRouteWithChildren
+  ProtectedIndexRoute: typeof ProtectedIndexRoute
+  ProtectedHistoryIndexRoute: typeof ProtectedHistoryIndexRoute
 }
 
-const SettingsRouteRouteChildren: SettingsRouteRouteChildren = {
-  SettingsAccountRoute: SettingsAccountRoute,
-  SettingsNotificationsRoute: SettingsNotificationsRoute,
-  SettingsIndexRoute: SettingsIndexRoute,
-  SettingsCategoriesIndexRoute: SettingsCategoriesIndexRoute,
+const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
+  ProtectedActivitiesRouteRoute: ProtectedActivitiesRouteRouteWithChildren,
+  ProtectedSettingsRouteRoute: ProtectedSettingsRouteRouteWithChildren,
+  ProtectedIndexRoute: ProtectedIndexRoute,
+  ProtectedHistoryIndexRoute: ProtectedHistoryIndexRoute,
 }
 
-const SettingsRouteRouteWithChildren = SettingsRouteRoute._addFileChildren(
-  SettingsRouteRouteChildren,
+const ProtectedRouteRouteWithChildren = ProtectedRouteRoute._addFileChildren(
+  ProtectedRouteRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  ProtectedRouteRoute: ProtectedRouteRoute,
-  ActivitiesRouteRoute: ActivitiesRouteRouteWithChildren,
-  SettingsRouteRoute: SettingsRouteRouteWithChildren,
+  ProtectedRouteRoute: ProtectedRouteRouteWithChildren,
   LoginRoute: LoginRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
-  HistoryIndexRoute: HistoryIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -27,6 +27,8 @@ const setStoredToken = (token: string | null) => {
 export const AuthProvider = ({ children }: PropsWithChildren) => {
 	const [isAuth, setIsAuth] = useState(getStoredToken());
 
+  console.log(isAuth);
+
 	const logout = useCallback(async () => {
 		setStoredToken(null);
 		setIsAuth(null);

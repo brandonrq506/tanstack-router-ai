@@ -1,6 +1,6 @@
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/settings")({
+export const Route = createFileRoute("/_protected/settings")({
 	component: RouteComponent,
 });
 
@@ -34,5 +34,5 @@ function RouteComponent() {
 			<br />
 			<Outlet />
 		</div>
-	);
+	)
 }

@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/settings/")({
+export const Route = createFileRoute("/_protected/settings/")({
 	component: RouteComponent,
 	beforeLoad: () => redirect({ to: "/settings/account" }),
 });

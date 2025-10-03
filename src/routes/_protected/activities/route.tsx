@@ -2,7 +2,7 @@ import { activityListQueryOptions } from "@/features/activities/api/queries/quer
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/activities")({
+export const Route = createFileRoute("/_protected/activities")({
 	component: RouteComponent,
 	loader: ({ context }) =>
 		context.queryClient.ensureQueryData(activityListQueryOptions()),
@@ -26,5 +26,5 @@ function RouteComponent() {
 			</ul>
 			<Outlet />
 		</div>
-	);
+	)
 }

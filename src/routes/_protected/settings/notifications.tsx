@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/settings/notifications')({
+export const Route = createFileRoute('/_protected/settings/notifications')({
   component: RouteComponent,
 })
 

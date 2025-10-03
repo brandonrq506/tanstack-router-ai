@@ -8,7 +8,7 @@ import { TimerPanel } from "@/features/tasks/components/timer-panel";
 import { TodayCompletedTaskList } from "@/features/tasks/components/today-completed-task-list";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_protected/")({
 	component: App,
 	// Warm the cache for all three without blocking the route render.
 	loader: ({ context: { queryClient } }) => {

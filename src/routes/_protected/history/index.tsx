@@ -10,7 +10,7 @@ interface HistorySearch {
 	date: string;
 }
 
-export const Route = createFileRoute("/history/")({
+export const Route = createFileRoute("/_protected/history/")({
 	component: RouteComponent,
 	validateSearch: (search): HistorySearch => {
 		const param = search.date as string | undefined;
@@ -25,7 +25,7 @@ export const Route = createFileRoute("/history/")({
 
 		return {
 			date: param,
-		};
+		}
 	},
 	loaderDeps: ({ search: { date } }) => ({ date }),
 	loader: ({ context: { queryClient }, deps: { date } }) =>
@@ -42,5 +42,5 @@ function RouteComponent() {
 			<br />
 			<TaskList date={date} />
 		</div>
-	);
+	)
 }
