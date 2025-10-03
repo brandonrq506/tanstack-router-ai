@@ -9,8 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as SettingsRouteRouteImport } from './routes/settings/route'
 import { Route as ActivitiesRouteRouteImport } from './routes/activities/route'
+import { Route as ProtectedRouteRouteImport } from './routes/_protected/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SettingsIndexRouteImport } from './routes/settings/index'
 import { Route as HistoryIndexRouteImport } from './routes/history/index'
@@ -24,6 +26,11 @@ import { Route as ActivitiesActivityIdIndexRouteImport } from './routes/activiti
 import { Route as ActivitiesActivityIdEditRouteImport } from './routes/activities/$activityId/edit'
 import { Route as ActivitiesActivityIdDeleteRouteImport } from './routes/activities/$activityId/delete'
 
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SettingsRouteRoute = SettingsRouteRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -32,6 +39,10 @@ const SettingsRouteRoute = SettingsRouteRouteImport.update({
 const ActivitiesRouteRoute = ActivitiesRouteRouteImport.update({
   id: '/activities',
   path: '/activities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProtectedRouteRoute = ProtectedRouteRouteImport.update({
+  id: '/_protected',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -103,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/activities': typeof ActivitiesRouteRouteWithChildren
   '/settings': typeof SettingsRouteRouteWithChildren
+  '/login': typeof LoginRoute
   '/activities/$activityId': typeof ActivitiesActivityIdRouteRouteWithChildren
   '/activities/new': typeof ActivitiesNewRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
@@ -118,6 +130,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/activities': typeof ActivitiesRouteRouteWithChildren
+  '/login': typeof LoginRoute
   '/activities/new': typeof ActivitiesNewRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/settings/account': typeof SettingsAccountRoute
@@ -132,8 +145,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_protected': typeof ProtectedRouteRoute
   '/activities': typeof ActivitiesRouteRouteWithChildren
   '/settings': typeof SettingsRouteRouteWithChildren
+  '/login': typeof LoginRoute
   '/activities/$activityId': typeof ActivitiesActivityIdRouteRouteWithChildren
   '/activities/new': typeof ActivitiesNewRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
@@ -152,6 +167,7 @@ export interface FileRouteTypes {
     | '/'
     | '/activities'
     | '/settings'
+    | '/login'
     | '/activities/$activityId'
     | '/activities/new'
     | '/demo/tanstack-query'
@@ -167,6 +183,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/activities'
+    | '/login'
     | '/activities/new'
     | '/demo/tanstack-query'
     | '/settings/account'
@@ -180,8 +197,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_protected'
     | '/activities'
     | '/settings'
+    | '/login'
     | '/activities/$activityId'
     | '/activities/new'
     | '/demo/tanstack-query'
@@ -197,14 +216,23 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProtectedRouteRoute: typeof ProtectedRouteRoute
   ActivitiesRouteRoute: typeof ActivitiesRouteRouteWithChildren
   SettingsRouteRoute: typeof SettingsRouteRouteWithChildren
+  LoginRoute: typeof LoginRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
   HistoryIndexRoute: typeof HistoryIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -217,6 +245,13 @@ declare module '@tanstack/react-router' {
       path: '/activities'
       fullPath: '/activities'
       preLoaderRoute: typeof ActivitiesRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_protected': {
+      id: '/_protected'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof ProtectedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -358,8 +393,10 @@ const SettingsRouteRouteWithChildren = SettingsRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProtectedRouteRoute: ProtectedRouteRoute,
   ActivitiesRouteRoute: ActivitiesRouteRouteWithChildren,
   SettingsRouteRoute: SettingsRouteRouteWithChildren,
+  LoginRoute: LoginRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
   HistoryIndexRoute: HistoryIndexRoute,
 }
