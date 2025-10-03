@@ -16,8 +16,8 @@ function RouteComponent() {
 	return (
 		<Modal
 			isOpen={isOpen}
-			onClose={() => navigate({ to: "..", from: Route.id })}>
+			onClose={() => navigate({ to: "..", from: Route.fullPath })}>
 			Hello "/activities/new"!
 		</Modal>
-	)
+	);
 }

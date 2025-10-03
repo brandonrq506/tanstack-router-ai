@@ -13,6 +13,10 @@ export default function Header() {
 				</div>
 
 				<div className="px-2 font-bold">
+					<Link to="/activities">Activities</Link>
+				</div>
+
+				<div className="px-2 font-bold">
 					<Link to="/history" search={{ date: "today" }}>
 						History
 					</Link>

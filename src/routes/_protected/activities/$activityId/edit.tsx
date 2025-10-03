@@ -5,9 +5,11 @@ import { Modal } from "@/components/core";
 import { activityByIdQueryOptions } from "@/features/activities/api/queries/queries";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_protected/activities/$activityId/edit")({
-	component: RouteComponent,
-});
+export const Route = createFileRoute("/_protected/activities/$activityId/edit")(
+	{
+		component: RouteComponent,
+	},
+);
 
 function RouteComponent() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -22,9 +24,11 @@ function RouteComponent() {
 	return (
 		<Modal
 			isOpen={isOpen}
-			onClose={() => navigate({ to: "../..", from: Route.id, replace: true })}>
+			onClose={() =>
+				navigate({ to: "../..", from: Route.fullPath, replace: true })
+			}>
 			<h2>Editing activity {data.name}</h2>
 			<p>Activities time: {data.exp_seconds}</p>
 		</Modal>
-	)
+	);
 }

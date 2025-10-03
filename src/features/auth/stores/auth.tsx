@@ -1,21 +1,20 @@
 import {
 	type PropsWithChildren,
-	createContext,
-	use,
 	useCallback,
-	useEffect,
 	useState,
 } from "react";
 
-export type AuthContext = {
-	isAuth: boolean;
-	login: (token: string) => void;
-	logout: () => void;
-};
-
-const AuthContext = createContext<AuthContext | null>(null);
+import { apiV1 } from "@/integrations/axios";
+import { AxiosHeaders } from "axios";
+import { AuthContext } from "./auth-context";
 
 const key = "token";
+
+const logoutRef: { current: () => void } = {
+	current: () => {},
+};
+
+let interceptorsRegistered = false;
 
 const getStoredToken = () => localStorage.getItem(key);
 
@@ -24,34 +23,60 @@ const setStoredToken = (token: string | null) => {
 	else localStorage.removeItem(key);
 };
 
+const ensureAuthInterceptors = () => {
+	if (interceptorsRegistered) return;
+
+	apiV1.interceptors.request.use((config) => {
+		const token = getStoredToken();
+		if (!token) return config;
+
+		if (!config.headers) {
+			config.headers = new AxiosHeaders();
+		}
+
+		if (config.headers instanceof AxiosHeaders) {
+			config.headers.set("Authorization", `Bearer ${token}`);
+			return config;
+		}
+
+		(config.headers as Record<string, string>).Authorization = `Bearer ${token}`;
+		return config;
+	});
+
+	apiV1.interceptors.response.use(
+		(response) => response,
+		(error) => {
+			const UNAUTHORIZED = 401;
+			if (error.response?.status === UNAUTHORIZED) {
+				logoutRef.current();
+			}
+			return Promise.reject(error);
+		},
+	);
+
+	interceptorsRegistered = true;
+};
+
+ensureAuthInterceptors();
+
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-	const [isAuth, setIsAuth] = useState(getStoredToken());
+	const [token, setToken] = useState(getStoredToken());
 
-  console.log(isAuth);
-
-	const logout = useCallback(async () => {
+	const logout = useCallback(() => {
 		setStoredToken(null);
-		setIsAuth(null);
+		setToken(null);
 	}, []);
 
-	const login = useCallback(async (token: string) => {
-		setStoredToken(token);
-		setIsAuth(token);
+	const login = useCallback((newToken: string) => {
+		setStoredToken(newToken);
+		setToken(newToken);
 	}, []);
 
-	useEffect(() => {
-		setIsAuth(getStoredToken());
-	}, []);
+	logoutRef.current = logout;
 
 	return (
-		<AuthContext.Provider value={{ isAuth: Boolean(isAuth), login, logout }}>
+		<AuthContext.Provider value={{ isAuth: Boolean(token), login, logout }}>
 			{children}
 		</AuthContext.Provider>
 	);
-};
-
-export const useAuth = () => {
-	const context = use(AuthContext);
-	if (!context) throw new Error("useAuth must be used within an AuthProvider");
-	return context;
 };

@@ -2,7 +2,8 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 
-import { AuthProvider, useAuth } from "./features/auth/stores/auth.tsx";
+import { AuthProvider } from "./features/auth/stores/auth.tsx";
+import { useAuth } from "./features/auth/stores/use-auth.ts";
 import * as TanStackQueryProvider from "./integrations/tanstack-query/root-provider.tsx";
 
 // Import the generated route tree

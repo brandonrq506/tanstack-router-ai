@@ -5,7 +5,9 @@ import { Modal } from "@/components/core";
 import { activityByIdQueryOptions } from "@/features/activities/api/queries/queries";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_protected/activities/$activityId/delete")({
+export const Route = createFileRoute(
+	"/_protected/activities/$activityId/delete",
+)({
 	component: RouteComponent,
 });
 
@@ -22,8 +24,10 @@ function RouteComponent() {
 	return (
 		<Modal
 			isOpen={isOpen}
-			onClose={() => navigate({ to: "../..", from: Route.id, replace: true })}>
+			onClose={() =>
+				navigate({ to: "../..", from: Route.fullPath, replace: true })
+			}>
 			<h2>Are you sure you want to delete: {data.name}?</h2>
 		</Modal>
-	)
+	);
 }

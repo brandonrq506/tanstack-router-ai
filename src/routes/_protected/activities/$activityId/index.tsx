@@ -22,7 +22,12 @@ function RouteComponent() {
 	return (
 		<Modal
 			isOpen={isOpen}
-			onClose={() => navigate({ to: "../..", from: Route.id, replace: true })}>
+			onClose={() =>
+				navigate({
+					to: "/activities",
+					replace: true,
+				})
+			}>
 			<h2>Showing details for: {data.name}</h2>
 			<br />
 			<p>
@@ -30,5 +35,5 @@ function RouteComponent() {
 				avg_time, expect time, etc. Rate of times under expected time, etc.
 			</p>
 		</Modal>
-	)
+	);
 }

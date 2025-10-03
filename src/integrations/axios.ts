@@ -5,14 +5,10 @@ import type { AxiosError, AxiosResponse } from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-// Added hardcoded API token
-const API_TOKEN = "ebcf334ac8a97558d1f3815ccbaf142edb4dc40a";
-
 export const apiV1 = axios.create({
 	baseURL: `${API_URL}/v1`,
 	headers: {
 		"Content-Type": "application/json",
-		Authorization: `Bearer ${API_TOKEN}`,
 	},
 });
 
